@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="effibote3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="prefix" value="" />
+  <xacro:include filename="$(find effibote3_description)/urdf/effibote3.xacro" />
+  <xacro:effibote3/>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    <legacyModeNS>false</legacyModeNS>
+    </plugin>
+  </gazebo>
+
+</robot>

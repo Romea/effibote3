@@ -1,0 +1,7 @@
+base_link_name: base_link
+base_footprint_link_name: base_footprint
+inertial_link_name: inertial_link
+front_left_wheel_spinning_link_name: front_left_wheel_spinning_link
+front_right_wheel_spinning_link_name: front_right_wheel_spinning_link
+rear_left_wheel_spinning_link_name: rear_left_wheel_spinning_link
+rear_right_wheel_spinning_link_name: rear_right_wheel_spinning_link

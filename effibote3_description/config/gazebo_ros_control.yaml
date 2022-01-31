@@ -1,0 +1,4 @@
+front_left_wheel_spinning_joint: {"p": 10.0, "i": 0.0, "d": 0.1}
+front_right_wheel_spinning_joint: {"p": 10.0, "i": 0.0, "d": 0.1}
+rear_left_wheel_spinning_joint: {"p": 10.0, "i": 0.0, "d": 0.1}
+rear_right_wheel_spinning_joint: {"p": 10.0, "i": 0.0, "d": 0.1}
