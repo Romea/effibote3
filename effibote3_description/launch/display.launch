@@ -1,5 +1,0 @@
-<launch>
-  <include file="$(find romea_odo_description)/launch/display.launch">
-    <arg name="urdf_path" value="$(find effibote3_description)/urdf/effibote3.urdf.xacro"/>
-  </include>
-</launch>

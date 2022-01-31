@@ -5,9 +5,7 @@
   <xacro:effibote3/>
 
   <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    <legacyModeNS>false</legacyModeNS>
+    <plugin filename="libgazebo_ros_control2.so" name="gazebo_ros2_control">
     </plugin>
   </gazebo>
 

@@ -3,6 +3,7 @@
 
     <xacro:property name="M_PI" value="3.14159"/>
     <xacro:include filename="$(find romea_odo_description)/urdf/4WD_chassis.xacro" />
+    <xacro:include filename="$(find romea_odo_description)/ros2_control/4WD.ros2_control.xacro"/>
 
     <xacro:property name="chassis_conf" value="$(find effibote3_description)/config/effibote3_chassis.yaml" />
     <xacro:property name="kinematic_conf" value="$(find effibote3_description)/config/effibote3_kinematic.yaml" />
@@ -80,6 +81,8 @@
         <!-- visual wheel -->
         <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
     </xacro:chassis>
+
+    <xacro:base_control/>
 
   </xacro:macro>
 
