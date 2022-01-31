@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model
+  href="http://download.ros.org/schema/package_format3.xsd"
+  schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>effibote3</name>
+  <version>0.0.0</version>
+  <description>Effibot E3 robot metapackage</description>
+
+  <maintainer email="jean.laneurit@inrae.fr">Jean Laneurit</maintainer>
+
+  <license>BSD</license>
+
+  <author>Jean Laneurit</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>effibote3_base</exec_depend>
+  <exec_depend>effibote3_bringup</exec_depend>
+  <exec_depend>effibote3_description</exec_depend>
+  <exec_depend>effibote3_msgs</exec_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+
+</package>
