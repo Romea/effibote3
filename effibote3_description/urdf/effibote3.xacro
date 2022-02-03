@@ -66,7 +66,7 @@
     <xacro:property name="chassis_height" value="${min(front_wheel_radius,rear_wheel_radius)}" />
 
 
-  <xacro:macro name="effibote3">
+  <xacro:macro name="effibote3" params="use_sim prefix">
 
     <xacro:chassis>
         <visual>
@@ -82,7 +82,7 @@
         <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
     </xacro:chassis>
 
-    <xacro:base_control/>
+    <xacro:base_control use_sim="${use_sim}"/>
 
   </xacro:macro>
 
