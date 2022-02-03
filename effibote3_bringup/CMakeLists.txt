@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(adap2e_bringup)
+project(effibote3_bringup)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -9,7 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch
+  DIRECTORY config launch
   DESTINATION share/${PROJECT_NAME}
 )
 

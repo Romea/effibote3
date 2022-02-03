@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>adap2e_bringup</name>
+  <name>effibote3_bringup</name>
   <version>0.0.0</version>
-  <description>Package with adap2e launch files.</description>
+  <description>Package with effibote3 launch files.</description>
 
   <author email="jean.laneurit@inrae.fr">Jean Laneuerit</author>
   <maintainer email="jean.laneurit@inrae.fr">Jean Laneuerit</maintainer>
@@ -12,7 +12,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>adap2e_description</exec_depend>
+  <exec_depend>effibote3_description</exec_depend>
   <exec_depend>romea_odo_description</exec_depend>
   <exec_depend>joint_state_publisher_gui</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
