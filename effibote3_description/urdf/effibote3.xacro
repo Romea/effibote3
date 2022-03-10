@@ -2,8 +2,8 @@
 <robot name="effibote3" xmlns:xacro="http://ros.org/wiki/xacro">
 
     <xacro:property name="M_PI" value="3.14159"/>
-    <xacro:include filename="$(find romea_odo_description)/urdf/4WD_chassis.xacro" />
-    <xacro:include filename="$(find romea_odo_description)/ros2_control/4WD.ros2_control.xacro"/>
+    <xacro:include filename="$(find romea_mobile_base_description)/urdf/4WD_chassis.xacro" />
+    <xacro:include filename="$(find romea_mobile_base_description)/ros2_control/4WD.ros2_control.xacro"/>
 
     <xacro:property name="chassis_conf" value="$(find effibote3_description)/config/effibote3_chassis.yaml" />
     <xacro:property name="kinematic_conf" value="$(find effibote3_description)/config/effibote3_kinematic.yaml" />
