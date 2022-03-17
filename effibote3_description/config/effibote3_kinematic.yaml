@@ -1,7 +1,0 @@
-maximal_wheel_speed: 3.
-maximal_wheel_acceleration: 1.
-maximal_emergency_stop_deceleration: 1.
-command_delay: 0.
-z_inertial_moment: 10
-body_reference_x: 0
-
