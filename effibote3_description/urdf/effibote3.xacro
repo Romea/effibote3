@@ -54,7 +54,7 @@
 
     <!-- Wheel Mounting Positions -->
     <xacro:property name="ground_clearance" value="${props['geometry']['ground_clearance']}"/>
-    <xacro:property name="front_wheel_y_offset" value="${props['geometry']['rear_axle']['wheels']['hub_carrier_offset']}" />
+    <xacro:property name="front_wheel_y_offset" value="${props['geometry']['front_axle']['wheels']['hub_carrier_offset']}" />
     <xacro:property name="rear_wheel_y_offset" value="${props['geometry']['rear_axle']['wheels']['hub_carrier_offset']}" />
     <xacro:property name="chassis_height" value="${min(front_wheel_radius,rear_wheel_radius)}" />
 

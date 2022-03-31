@@ -17,8 +17,11 @@ def generate_launch_description():
         launch_arguments={"verbose": "false"}.items(),
     )
 
+    info_file = get_package_share_directory("effibote3_description") + "/config/effibote3.yaml"
     urdf_file = get_package_share_directory("effibote3_description") + "/urdf/effibote3.urdf.xacro"
-    controller_conf_yaml_file = get_package_share_directory("effibote3_bringup") + "/config/diff_drive_controller.yaml"
+    controller_manager_yaml_file = get_package_share_directory("effibote3_bringup") + "/config/controller_manager.yaml"
+    diff_drive_controller_yaml_file = get_package_share_directory("effibote3_bringup") + "/config/diff_drive_controller.yaml"
+    mobile_base_controller_yaml_file = get_package_share_directory("effibote3_bringup") + "/config/mobile_base_controller.yaml"
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -35,19 +38,13 @@ def generate_launch_description():
 #            ),
             " use_sim:=true ",
             "controller_conf_yaml_file:=",
-            controller_conf_yaml_file,
+            controller_manager_yaml_file,
 
         ]
     )
+
     robot_description = {"robot_description": robot_description_content}
 
-    diff_drive_controller = PathJoinSubstitution(
-        [
-            FindPackageShare("effibote3_bringup"),
-            "config",
-            "diff_drive_controller.yaml",
-        ]
-    )
 
     robot_state_publisher = Node(
         package="robot_state_publisher",
@@ -74,7 +71,15 @@ def generate_launch_description():
     diff_drive_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["diff_drive_controller"],
+        arguments=["diff_drive_controller","--param-file",diff_drive_controller_yaml_file],
+        output="screen",
+    )
+
+    mobile_base_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        name="mobile_base_controller_spawner",
+        arguments=["mobile_base_controller","--param-file",mobile_base_controller_yaml_file],
         output="screen",
     )
 
@@ -84,7 +89,8 @@ def generate_launch_description():
             robot_state_publisher,
             spawn_entity,
             joint_state_broadcaster,
-#            diff_drive_controller
+#            diff_drive_controller,
+            mobile_base_controller,
 #            controller_manager,
         ]
     )
