@@ -1,15 +1,14 @@
 /mobile_base_controller:
   ros__parameters:
     controller:
-      toto: titi
       base_frame_id: base_link
       odom_frame_id: odom
       enable_odom_tf: false
       publish_rate: 50.0
       timeout: 0.5
 #      joints_prefix:
-      command_limits:
-        minimal_longitudinal_speed: -1.
+#      command_limits:
+#        minimal_longitudinal_speed:
 #        maximal_longitudinal_speed:
 #        maximal_angular_speed:
     base_info:

@@ -58,8 +58,11 @@
     <xacro:property name="rear_wheel_y_offset" value="${props['geometry']['rear_axle']['wheels']['hub_carrier_offset']}" />
     <xacro:property name="chassis_height" value="${min(front_wheel_radius,rear_wheel_radius)}" />
 
+   <!-- Ros2 control hardware plugin -->
+   <xacro:property name="simulation_hardware_plugin" value="romea_mobile_base_gazebo/GazeboSystemInterface4WD"/>
+   <xacro:property name="live_hardware_plugin" value="effibote3_hardware/Effibote3Hardware"/>
 
-  <xacro:macro name="effibote3" params="use_sim prefix">
+  <xacro:macro name="effibote3" params="mode prefix">
 
     <xacro:chassis>
         <visual>
@@ -75,7 +78,9 @@
         <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
     </xacro:chassis>
 
-    <xacro:base_control use_sim="${use_sim}"/>
+    <xacro:if value="${mode == 'simulation' or mode == 'live'}">
+       <xacro:base_control mode="${mode}"/>
+    </xacro:if>
 
   </xacro:macro>
 

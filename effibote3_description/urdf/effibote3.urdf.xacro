@@ -2,14 +2,14 @@
 <robot name="effibote3" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="prefix" default="" />
-  <xacro:arg name="use_sim" default="true" />
+  <xacro:arg name="mode" default="simulation" />
   <xacro:arg name="controller_conf_yaml_file" default=""/>
 
   <xacro:property name="prefix" value="$(arg prefix)"/>
   <xacro:property name="controller_conf_yaml_file" value="$(arg controller_conf_yaml_file)"/>
 
   <xacro:include filename="$(find effibote3_description)/urdf/effibote3.xacro" />
-  <xacro:effibote3 use_sim="$(arg use_sim)" prefix="$(arg prefix)"/>
+  <xacro:effibote3 mode="$(arg mode)" prefix="$(arg prefix)"/>
 
   <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
