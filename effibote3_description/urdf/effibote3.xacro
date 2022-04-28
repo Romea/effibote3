@@ -60,7 +60,7 @@
 
    <!-- Ros2 control hardware plugin -->
    <xacro:property name="simulation_hardware_plugin" value="romea_mobile_base_gazebo/GazeboSystemInterface4WD"/>
-   <xacro:property name="live_hardware_plugin" value="effibote3_hardware/Effibote3Hardware"/>
+   <xacro:property name="live_hardware_plugin" value="effibote3_hardware/EffibotE3Hardware"/>
 
   <xacro:macro name="effibote3" params="mode prefix">
 
