@@ -86,7 +86,6 @@ def generate_launch_description():
             joint_state_broadcaster,
             controller_manager,
 #            diff_drive_controller,
-#            mobile_base_controller,
-#            ,
+            mobile_base_controller,
         ]
     )
