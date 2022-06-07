@@ -6,7 +6,7 @@
         front_axle:
           wheels_distance: 0.515
           wheels:
-            radius: 0.1325
+            radius: 0.1315
             width: 0.1
             hub_carrier_offset: 0.0
         rear_axle:

@@ -1,4 +1,4 @@
-controller_manager:
+/**:
   ros__parameters:
     update_rate: 100  # Hz
 
@@ -10,74 +10,3 @@ controller_manager:
 
     mobile_base_controller:
       type: romea_mobile_base_controllers/MobileBaseController4WD
-
-#/mobile_base_controller:
-#  ros__parameters:
-#    controller:
-#      toto: titi
-#      base_frame_id: base_link
-#      odom_frame_id: odom
-#      enable_odom_tf: false
-#      publish_rate: 50.0
-#      timeout: 0.5
-##      joints_prefix:
-#      command_limits:
-#        minimal_longitudinal_speed: -1
-##        maximal_longitudinal_speed:
-##        maximal_angular_speed:
-#    base_info:
-#      geometry:
-#        axles_distance: 0.392
-#        front_axle:
-#          wheels_distance: 0.515
-#          wheels:
-#            radius: 0.1325
-#            width: 0.1
-#            hub_carrier_offset: 0.0
-#        rear_axle:
-#          wheels_distance: 0.515
-#          wheels:
-#            radius: 0.1315
-#            width: 0.1
-#            hub_carrier_offset: 0.0
-#        aabb:
-#          length: 0.54000
-#          width: 0.40000
-#          height: 0.18000
-#          center: [0., 0., 0.188]
-#        ground_clearance: 0.098
-
-
-#      wheels_speed_control:
-#         command:
-#           maximal_speed: 3.0
-#           maximal_acceleration: 1.0
-#         sensor:
-#           speed_std: 0.1
-#           speed_range: 3.0
-
-#      inertia:
-#        mass: 17.
-#        center: [0., 0., 0.188]
-#        z_moment: 10.0
-
-#      control_point : [0.0, 0.0, 0.0]
-
-#      joints:
-#        base_footprint_joint_name : base_footprint
-#        inertial_joint_name: inertial_joint
-#        front_left_wheel_spinning_joint_name: front_left_wheel_spinning_joint
-#        front_right_wheel_spinning_joint_name: front_right_wheel_spinning_joint
-#        rear_left_wheel_spinning_joint_name: rear_left_wheel_spinning_joint
-#        rear_right_wheel_spinning_joint_name: rear_right_wheel_spinning_joint
-
-#      links:
-#        base_link_name: base_link
-#        base_footprint_link_name: base_footprint
-#        inertial_link_name: inertial_link
-#        front_left_wheel_spinning_link_name: front_left_wheel_spinning_link
-#        front_right_wheel_spinning_link_name: front_right_wheel_spinning_link
-#        rear_left_wheel_spinning_link_name: rear_left_wheel_spinning_link
-#        rear_right_wheel_spinning_link_name: rear_right_wheel_spinning_link
-
-
