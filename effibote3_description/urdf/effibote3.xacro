@@ -2,8 +2,8 @@
 <robot name="effibote3" xmlns:xacro="http://ros.org/wiki/xacro">
 
     <xacro:property name="M_PI" value="3.14159"/>
-    <xacro:include filename="$(find romea_mobile_base_description)/urdf/4WD_chassis.xacro" />
-    <xacro:include filename="$(find romea_mobile_base_description)/ros2_control/4WD.ros2_control.xacro"/>
+    <xacro:include filename="$(find romea_mobile_base_description)/urdf/base4WD.chassis.xacro" />
+    <xacro:include filename="$(find romea_mobile_base_description)/ros2_control/base4WD.ros2_control.xacro"/>
 
     <xacro:property name="conf" value="$(find effibote3_description)/config/effibote3.yaml" />
     <xacro:property name="props" value="${load_yaml(conf)['/**']['ros__parameters']['base_info']}" />
@@ -26,9 +26,13 @@
     <xacro:property name="rear_right_wheel_spinning_joint" value="${props['joints']['rear_right_wheel_spinning_joint_name']}" />
 
     <!-- Base Properties -->
+    <xacro:property name="ground_clearance" value="${props['geometry']['ground_clearance']}"/>
     <xacro:property name="aabb_length" value="${props['geometry']['aabb']['length']}" />
     <xacro:property name="aabb_width" value="${props['geometry']['aabb']['width']}" />
     <xacro:property name="aabb_height" value="${props['geometry']['aabb']['height']}" />
+    <xacro:property name="aabb_center_x" value="${props['geometry']['aabb']['center'][0]}" />
+    <xacro:property name="aabb_center_y" value="${props['geometry']['aabb']['center'][1]}" />
+    <xacro:property name="aabb_center_z" value="${props['geometry']['aabb']['center'][2]}" />
 
     <xacro:property name="wheelbase" value="${props['geometry']['axles_distance']}"/>
     <xacro:property name="front_track" value="${props['geometry']['front_axle']['wheels_distance']}"/>
@@ -53,7 +57,6 @@
     <xacro:property name="wheel_width" value="${front_wheel_width}" />
 
     <!-- Wheel Mounting Positions -->
-    <xacro:property name="ground_clearance" value="${props['geometry']['ground_clearance']}"/>
     <xacro:property name="front_wheel_y_offset" value="${props['geometry']['front_axle']['wheels']['hub_carrier_offset']}" />
     <xacro:property name="rear_wheel_y_offset" value="${props['geometry']['rear_axle']['wheels']['hub_carrier_offset']}" />
     <xacro:property name="chassis_height" value="${min(front_wheel_radius,rear_wheel_radius)}" />
@@ -69,6 +72,7 @@
           <geometry>
             <box size="${aabb_length} ${aabb_width} ${aabb_height}"/>
           </geometry>
+          <origin xyz="${aabb_center_x-body_reference_x} ${aabb_center_y}  ${aabb_center_z-chassis_height}" rpy="0 0 0" />
           <material name="grey">
             <color rgba="0.6 0.6 0.6 1"/>
           </material>
