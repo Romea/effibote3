@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="effibote3_ros2_control_urdf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="prefix" default="effibote3" />
+  <xacro:arg name="mode" default="simulation" />
+  <xacro:arg name="base_name" default="base" />
+
+
+  <xacro:include filename="$(find effibote3_description)/ros2_control/effibote3.ros2_control.xacro" />
+
+  <xacro:effibote3_ros2_control
+    mode="$(arg mode)"
+    prefix="$(arg prefix)"
+    base_name="$(arg base_name)" />
+
+</robot>

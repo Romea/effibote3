@@ -3,11 +3,11 @@
 <package format="3">
   <name>effibote3_hardware</name>
   <version>0.0.0</version>
-  <description>Adap2e hardware</description>
+  <description>Package containging effibote3 hardware interface</description>
 
   <maintainer email="jean.laneurit@inrae.fr">Jean Laneurit</maintainer>
 
-  <license>TODO</license>
+  <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
@@ -20,6 +20,7 @@
   <depend>romea_core_mobile_base</depend>
   <depend>romea_mobile_base_utils</depend>
   <depend>romea_mobile_base_hardware</depend>
+  <depend>serial</depend>
 
   <test_depend>ament_cmake_gtest</test_depend>
 

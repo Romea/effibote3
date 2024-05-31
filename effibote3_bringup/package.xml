@@ -3,17 +3,28 @@
 <package format="3">
   <name>effibote3_bringup</name>
   <version>0.0.0</version>
-  <description>Package with effibote3 launch files.</description>
+  <description>Package containing effibote3 launch files.</description>
 
-  <author email="jean.laneurit@inrae.fr">Jean Laneuerit</author>
-  <maintainer email="jean.laneurit@inrae.fr">Jean Laneuerit</maintainer>
+  <maintainer email="jean.laneurit@inrae.fr">Jean Laneurit</maintainer>
 
-  <license>TODO</license>
+  <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>effibote3_description</exec_depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+  <depend>ament_index_python</depend>
+  <depend>romea_common_bringup</depend>
+  <depend>husky_description</depend>
+
+  <exec_depend>romea_mobile_base_controllers</exec_depend>
   <exec_depend>romea_mobile_base_description</exec_depend>
+  <exec_depend>romea_simulation_gazebo_ros2_control</exec_depend>
+  <exec_depend>romea_teleop_drivers</exec_depend>
+  <exec_depend>romea_joystick_bringup</exec_depend>
+  <exec_depend>romea_cmd_mux</exec_depend>
+
+  <exec_depend>gazebo_plugins</exec_depend>
   <exec_depend>joint_state_publisher_gui</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>rviz2</exec_depend>
@@ -22,4 +33,5 @@
   <export>
     <build_type>ament_cmake</build_type>
   </export>
+
 </package>

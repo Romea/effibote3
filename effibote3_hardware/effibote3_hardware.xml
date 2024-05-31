@@ -1,7 +1,7 @@
 <library path="effibote3_hardware">
   <class name="effibote3_hardware/EffibotE3Hardware"
-         type="romea::EffibotE3Hardware"
-         base_class_type="hardware_interface::SystemInterface">
+    type="romea::ros2::EffibotE3Hardware"
+    base_class_type="hardware_interface::SystemInterface">
     <description>
       Effibot E3 hardware interface
     </description>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="chassis">
+
+    <xacro:macro name="chassis_visual">
+        <visual>
+            <geometry>
+                <box size="${aabb_length} ${aabb_width} ${aabb_height}" />
+            </geometry>
+            <origin
+                xyz="${aabb_center_x-body_reference_x} ${aabb_center_y}  ${aabb_center_z-chassis_height}"
+                rpy="0 0 0" />
+            <material name="grey">
+                <color rgba="0.6 0.6 0.6 1" />
+            </material>
+        </visual>
+    </xacro:macro>
+</robot>

@@ -21,12 +21,17 @@ find_package(romea_core_mobile_base REQUIRED)
 find_package(romea_common_utils REQUIRED)
 find_package(romea_mobile_base_utils REQUIRED)
 find_package(romea_mobile_base_hardware REQUIRED)
+find_package(serial REQUIRED)
+find_package(std_msgs)
 
 
 ## COMPILE
 add_library(
   ${PROJECT_NAME}
   SHARED
+  src/effibote3_communicator_receiver.cpp
+  src/effibote3_communicator_sender.cpp
+  src/effibote3_display.cpp
   src/effibote3_hardware.cpp
 )
 target_include_directories(
@@ -45,6 +50,8 @@ ament_target_dependencies(
   romea_common_utils
   romea_mobile_base_utils
   romea_mobile_base_hardware
+  std_msgs
+  serial
 )
 
 # Causes the visibility macros to use dllexport rather than dllimport,
@@ -88,6 +95,8 @@ ament_export_dependencies(
   romea_common_utils
   romea_mobile_base_utils
   romea_mobile_base_hardware
+  serial
+  std_msgs
 )
 
 ament_package()
