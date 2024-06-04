@@ -29,9 +29,6 @@ find_package(std_msgs)
 add_library(
   ${PROJECT_NAME}
   SHARED
-  src/effibote3_communicator_receiver.cpp
-  src/effibote3_communicator_sender.cpp
-  src/effibote3_display.cpp
   src/effibote3_hardware.cpp
 )
 target_include_directories(
