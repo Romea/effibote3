@@ -36,3 +36,8 @@ repositories:
     type: git
     url: git@gitlab-ssh.irstea.fr:romea_ros2/interfaces/vehicles/effibote3.git
     version: devel
+
+  third_party/serial:
+    type: git
+    url: git@gitlab-ssh.irstea.fr:jean.laneurit/serial-ros2.git
+    version: master

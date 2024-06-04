@@ -36,3 +36,8 @@ repositories:
     type: git
     url: https://github.com/Romea/effibote3.git
     version: main
+
+  third_party/serial:
+    type: git
+    url: git@gitlab-ssh.irstea.fr:jean.laneurit/serial-ros2.git
+    version: master
