@@ -29,7 +29,7 @@ galactic_focal_build:
   script:
     - colcon build
     - source install/setup.bash
-    - colcon test --packages-select adap2e_bringup adap2e_description adap2e_hardware
+    - colcon test --packages-select effibote3_bringup effibote3_description effibote3_hardware
     - colcon test-result --verbose
 
 # galatic
@@ -39,5 +39,5 @@ humble_jammy_build:
   script:
     - colcon build
     - source install/setup.bash
-    - colcon test --packages-select adap2e_bringup adap2e_description adap2e_hardware
+    - colcon test --packages-select effibote3_bringup effibote3_description effibote3_hardware
     - colcon test-result --verbose
