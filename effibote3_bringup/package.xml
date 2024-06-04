@@ -15,7 +15,7 @@
   <depend>launch_ros</depend>
   <depend>ament_index_python</depend>
   <depend>romea_common_bringup</depend>
-  <depend>husky_description</depend>
+  <depend>effibote3_description</depend>
 
   <exec_depend>romea_mobile_base_controllers</exec_depend>
   <exec_depend>romea_mobile_base_description</exec_depend>
