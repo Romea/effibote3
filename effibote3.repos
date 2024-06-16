@@ -32,7 +32,7 @@ repositories:
     type: git
     url: git@gitlab-ssh.irstea.fr:romea_ros2/interfaces/vehicles/romea_mobile_base.git
     version: devel
-  romea_ros2/interfaces/vehicles/adap2e:
+  romea_ros2/interfaces/vehicles/effibote3:
     type: git
     url: git@gitlab-ssh.irstea.fr:romea_ros2/interfaces/vehicles/effibote3.git
     version: devel
@@ -40,4 +40,4 @@ repositories:
   third_party/serial:
     type: git
     url: https://github.com/Romea-Third-Party/serial-ros2.git
-    version: master
+    version: romea
