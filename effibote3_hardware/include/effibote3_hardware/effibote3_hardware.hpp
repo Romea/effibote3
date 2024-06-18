@@ -44,6 +44,8 @@ public:
 
   EffibotE3Hardware();
 
+  virtual ~EffibotE3Hardware();
+
   hardware_interface::return_type read() override;
 
   hardware_interface::return_type write() override;

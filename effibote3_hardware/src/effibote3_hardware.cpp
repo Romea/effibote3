@@ -179,6 +179,15 @@ EffibotE3Hardware::EffibotE3Hardware()
 }
 
 //-----------------------------------------------------------------------------
+EffibotE3Hardware::~EffibotE3Hardware()
+{
+  // force deactive when interface has not been deactivated by controller manager but by ctrl-c
+  if (lifecycle_state_.id() == 3) {
+    on_deactivate(lifecycle_state_);
+  }
+}
+
+//-----------------------------------------------------------------------------
 hardware_interface::return_type EffibotE3Hardware::load_info_(
   const hardware_interface::HardwareInfo & hardware_info)
 {
