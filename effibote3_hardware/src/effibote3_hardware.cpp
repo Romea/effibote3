@@ -20,7 +20,7 @@
 
 // romea
 #include "effibote3_hardware/effibote3_hardware.hpp"
-#include "romea_mobile_base_hardware/hardware_info.hpp"
+#include "romea_mobile_base_utils/ros2_control/info/hardware_info_common.hpp"
 
 namespace
 {
@@ -194,9 +194,12 @@ hardware_interface::return_type EffibotE3Hardware::load_info_(
   RCLCPP_ERROR_STREAM(logger_, "load_info");
 
   try {
-    front_wheel_radius_ = get_parameter<float>(hardware_info, "front_wheel_radius");
-    rear_wheel_radius_ = get_parameter<float>(hardware_info, "rear_wheel_radius");
-    front_track_ = get_parameter<float>(hardware_info, "front_track");
+    // front_wheel_radius_ = get_parameter<float>(hardware_info, "front_wheel_radius");
+    // rear_wheel_radius_ = get_parameter<float>(hardware_info, "rear_wheel_radius");
+    // front_track_ = get_parameter<float>(hardware_info, "front_track");
+    front_wheel_radius_ = get_front_wheel_radius(hardware_info);
+    rear_wheel_radius_ = get_rear_wheel_radius(hardware_info);
+    front_track_ = get_front_track(hardware_info);
     return hardware_interface::return_type::OK;
   } catch (std::runtime_error & e) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("EffibotE3Hardware"), e.what());
@@ -259,7 +262,7 @@ hardware_interface::return_type EffibotE3Hardware::write()
 //-----------------------------------------------------------------------------
 void EffibotE3Hardware::get_hardware_command_()
 {
-  core::HardwareCommand4WD command = hardware_interface_->get_command();
+  core::HardwareCommand4WD command = hardware_interface_->get_hardware_command();
   front_left_wheel_angular_speed_command_ = command.frontLeftWheelSpinningSetPoint;
   front_right_wheel_angular_speed_command_ = command.frontRightWheelSpinningSetPoint;
   rear_left_wheel_angular_speed_command_ = command.rearLeftWheelSpinningSetPoint;
@@ -278,7 +281,7 @@ void EffibotE3Hardware::set_hardware_state_()
   state.rearLeftWheelSpinningMotion.torque = rear_left_wheel_torque_measure_;
   state.rearRightWheelSpinningMotion.velocity = rear_right_wheel_angular_speed_measure_;
   state.rearRightWheelSpinningMotion.torque = rear_right_wheel_torque_measure_;
-  hardware_interface_->set_state(state);
+  hardware_interface_->set_feedback(state);
 }
 
 //-----------------------------------------------------------------------------
