@@ -39,6 +39,12 @@ target_include_directories(
   PRIVATE
   include
 )
+
+target_compile_definitions(
+  ${PROJECT_NAME}
+  PUBLIC
+  ROS_DISTRO=${ROS_DISTRO})
+
 ament_target_dependencies(
   ${PROJECT_NAME}
   hardware_interface
