@@ -26,6 +26,7 @@
 #include "rclcpp/rclcpp.hpp"
 
 // romea
+#include "romea_common_utils/ros_versions.hpp"
 #include "romea_mobile_base_hardware/hardware_system_interface.hpp"
 
 // serial
@@ -46,9 +47,19 @@ public:
 
   virtual ~EffibotE3Hardware();
 
-  hardware_interface::return_type read() override;
+#if ROS_DISTRO == ROS_GALACTIC
+  hardware_interface::return_type read()override;
 
-  hardware_interface::return_type write() override;
+  hardware_interface::return_type write()override;
+#else
+  hardware_interface::return_type read(
+    const rclcpp::Time & time,
+    const rclcpp::Duration & period)override;
+
+  hardware_interface::return_type write(
+    const rclcpp::Time & time,
+    const rclcpp::Duration & period)override;
+#endif
 
 private:
   hardware_interface::return_type connect_() override;

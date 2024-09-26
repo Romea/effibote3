@@ -233,7 +233,13 @@ hardware_interface::return_type EffibotE3Hardware::disconnect_()
 }
 
 //-----------------------------------------------------------------------------
+#if ROS_DISTRO == ROS_GALACTIC
 hardware_interface::return_type EffibotE3Hardware::read()
+#else
+hardware_interface::return_type EffibotE3Hardware::read(
+  const rclcpp::Time & /*time*/,
+  const rclcpp::Duration & /*period*/)
+#endif
 {
   // RCLCPP_INFO(logger_, "Read data from robot");
   // serial_sender_.sendSetActiveCommand(serial_port_);
@@ -248,7 +254,13 @@ hardware_interface::return_type EffibotE3Hardware::read()
 }
 
 //-----------------------------------------------------------------------------
+#if ROS_DISTRO == ROS_GALACTIC
 hardware_interface::return_type EffibotE3Hardware::write()
+# else
+hardware_interface::return_type EffibotE3Hardware::write(
+  const rclcpp::Time & /*time*/,
+  const rclcpp::Duration & /*period*/)
+#endif
 {
   // RCLCPP_INFO(logger_, "Send command to robot");
 
