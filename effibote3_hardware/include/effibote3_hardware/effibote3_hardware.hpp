@@ -90,6 +90,12 @@ private:
 
   void read_left_wheel_speeds_();
 
+  void read_right_motor_currents_();
+
+  void read_left_motor_currents_();
+
+  void read_status_message_();
+
   void start_serial_listening_thread_();
 
   void stop_serial_listening_thread_();
@@ -131,6 +137,10 @@ private:
   std::atomic<float> front_right_wheel_torque_measure_;
   std::atomic<float> rear_left_wheel_torque_measure_;
   std::atomic<float> rear_right_wheel_torque_measure_;
+
+  std::atomic<float> battery_percentage_;
+  std::atomic<float> battery_voltage_;
+  std::atomic<float> temperature_;
 
   rclcpp::Logger logger_;
   serial::Serial serial_port_;

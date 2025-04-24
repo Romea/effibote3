@@ -476,8 +476,14 @@ void EffibotE3Hardware::read_frame_()
       case IN_LEFT_WHEEL_SPEED:
         read_left_wheel_speeds_();
         break;
-      // case IN_STATUS:
-      //   receiveStatusMessage_(frame);
+      case IN_RIGHT_MOTOR_CURRENT:
+        read_right_motor_currents_();
+        break;
+      case IN_LEFT_MOTOR_CURRENT:
+        read_left_motor_currents_();
+        break;
+      case IN_STATUS:
+        read_status_message_();
       //   break;
       // case IN_SET_OUTPUTS:
       //   receiveSetupOutputsReplyMessage_(frame);
@@ -510,12 +516,6 @@ void EffibotE3Hardware::read_right_wheel_speeds_()
 
   front_right_wheel_angular_speed_measure_ = EFFIBOT_E3_WHEEL_SPEED_RESOLUTION *
     static_cast<float>(front_right_wheel_speed_raw) / front_wheel_radius_;
-
-// #ifndef NDEBUG
-//   RCLCPP_INFO_STREAM(logger_, "[From EffibotE3] Right Wheel Speed :");
-//   RCLCPP_INFO_STREAM(logger_, "\t\t\t rearRightSpeed  (m/s) = " << rear_right_wheel_speed_raw);
-//   RCLCPP_INFO_STREAM(logger_, "\t\t\t frontRightSpeed (m/s) = " << front_right_wheel_speed_raw);
-// #endif
 }
 
 //-----------------------------------------------------------------------------
@@ -537,13 +537,65 @@ void EffibotE3Hardware::read_left_wheel_speeds_()
 
   front_left_wheel_angular_speed_measure_ = EFFIBOT_E3_WHEEL_SPEED_RESOLUTION *
     static_cast<float>(front_left_wheel_speed_raw) / front_wheel_radius_;
+}
 
+//-----------------------------------------------------------------------------
+void EffibotE3Hardware::read_right_motor_currents_()
+{
+    // Conversion FROM std::vector<unsigned char> TO u_int32_t
+  // The ..._raw values are in milliampere
+  u_int32_t rear_right_motor_current_raw   =
+    (u_int32_t) ((received_frame_data_[5] << 24) | (received_frame_data_[6] << 16) |
+    (received_frame_data_[7] << 8) | received_frame_data_[8]);
+  u_int32_t front_right_motor_current_raw  =
+    (u_int32_t) ((received_frame_data_[9] << 24) | (received_frame_data_[10] << 16) |
+    (received_frame_data_[11] << 8) | received_frame_data_[12]);
 
-  // #ifndef NDEBUG
-  // RCLCPP_INFO_STREAM(logger_, "[From EffibotE3] Left Wheel Speed :");
-  // RCLCPP_INFO_STREAM(logger_, "\t\t\t rearLeftSpeed  (m/s) = " << rear_left_wheel_speed_raw);
-  // RCLCPP_INFO_STREAM(logger_, "\t\t\t frontLeftSpeed (m/s) = " << front_left_wheel_speed_raw);
-  // #endif
+  // Conversion FROM milliampere TO ampere
+  float rear_right_motor_current  = EFFIBOT_E3_MOTOR_CURRENT_RESOLUTION *
+    static_cast<float>(rear_right_motor_current_raw);
+  float front_right_motor_current = EFFIBOT_E3_MOTOR_CURRENT_RESOLUTION *
+    static_cast<float>(front_right_motor_current_raw);
+
+  front_right_wheel_torque_measure_ = front_right_motor_current * battery_voltage_ /
+    front_right_wheel_angular_speed_measure_;
+  rear_right_wheel_torque_measure_ = rear_right_motor_current * battery_voltage_ /
+    rear_right_wheel_angular_speed_measure_;
+
+}
+
+//-----------------------------------------------------------------------------
+void EffibotE3Hardware::read_left_motor_currents_()
+{
+  // Conversion FROM std::vector<unsigned char> TO u_int32_t
+  // The ..._raw values are in milliampere
+  u_int32_t rear_left_motor_current_raw   =
+    (u_int32_t) ((received_frame_data_[5] << 24) | (received_frame_data_[6] << 16) |
+    (received_frame_data_[7] << 8) | received_frame_data_[8]);
+  u_int32_t front_left_motor_current_raw  =
+    (u_int32_t) ((received_frame_data_[9] << 24) | (received_frame_data_[10] << 16) |
+    (received_frame_data_[11] << 8) | received_frame_data_[12]);
+
+  // Conversion FROM milliampere TO ampere
+  float rear_left_motor_current  = EFFIBOT_E3_MOTOR_CURRENT_RESOLUTION *
+    static_cast<float>(rear_left_motor_current_raw);
+  float front_left_motor_current = EFFIBOT_E3_MOTOR_CURRENT_RESOLUTION *
+    static_cast<float>(front_left_motor_current_raw);
+
+  front_left_wheel_torque_measure_ = front_left_motor_current * battery_voltage_ /
+    front_right_wheel_angular_speed_measure_;
+  rear_left_wheel_torque_measure_ = rear_left_motor_current * battery_voltage_ /
+    rear_right_wheel_angular_speed_measure_;
+
+}
+
+//-----------------------------------------------------------------------------
+void EffibotE3Hardware::read_status_message_()
+{
+  temperature_ = static_cast<float>(received_frame_data_[5]);
+  battery_percentage_ = static_cast<u_int8_t>(received_frame_data_[6])/ 255.0;
+  battery_voltage_ = battery_percentage_ * EFFIBOT_E3_DIFFERENCE_BATTERY_VOLTAGE
+    + EFFIBOT_E3_MIN_BATTERY_VOLTAGE;
 }
 
 
