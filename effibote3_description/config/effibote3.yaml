@@ -19,7 +19,6 @@ geometry:
     height: 0.18000
     center: [0., 0., 0.188]
   ground_clearance: 0.098
-  fake_wheelbase: 1.2
 
 wheels_speed_control:
   command:
