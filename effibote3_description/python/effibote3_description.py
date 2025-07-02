@@ -32,15 +32,7 @@ import yaml
 from ament_index_python.packages import get_package_share_directory
 
 import romea_common_description
-
-from romea_mobile_base_description import (
-    get_specification_units,
-    get_command_limits,
-    get_command_type,
-    get_inertia,
-    get_track,
-    get_type
-)
+from romea_mobile_base_description import get_specification_units, get_complete_configuration
 
 
 def get_specifications_path_file():
@@ -54,18 +46,11 @@ def get_specifications_configuration():
 
 def get_configuration():
     specifications = get_specifications_configuration()
-    return {
-
-        "model": "effibote3",
-        "version": "",
-        "manufacturer": "effidence",
-        "type": get_type(specifications),
-        "command_type": get_command_type(specifications),
-        "command_limits": get_command_limits(specifications),
-        "inertia": get_inertia(specifications),
-        "wheelbase": specifications["geometry"]["fake_wheelbase"],
-        "track": get_track(specifications),
-    }
+    configuration = get_complete_configuration(specifications)
+    configuration["model"] = "effibote3"
+    configuration["version"] = ""
+    configuration["manufacturer"] = "effidence"
+    return configuration
 
 
 def generate_configuration_file(configuration, extended):
