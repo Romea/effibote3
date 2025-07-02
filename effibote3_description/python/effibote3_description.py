@@ -12,13 +12,71 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Copyright 2022 INRAE, French National Research Institute for Agriculture, Food and Environment
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 import xacro
-
+import yaml
 from ament_index_python.packages import get_package_share_directory
 
+import romea_common_description
 
-def urdf(prefix, mode, base_name, controller_manager_config_yaml_file, ros_prefix):
+from romea_mobile_base_description import (
+    get_specification_units,
+    get_command_limits,
+    get_command_type,
+    get_inertia,
+    get_track,
+    get_type
+)
+
+
+def get_specifications_path_file():
+    return get_package_share_directory("effibote3_description") + "/config/effibote3.yaml"
+
+
+def get_specifications_configuration():
+    with open(get_specifications_path_file(), "r") as f:
+        return yaml.safe_load(f)
+
+
+def get_configuration():
+    specifications = get_specifications_configuration()
+    return {
+
+        "model": "effibote3",
+        "version": "",
+        "manufacturer": "effidence",
+        "type": get_type(specifications),
+        "command_type": get_command_type(specifications),
+        "command_limits": get_command_limits(specifications),
+        "inertia": get_inertia(specifications),
+        "wheelbase": specifications["geometry"]["fake_wheelbase"],
+        "track": get_track(specifications),
+    }
+
+
+def generate_configuration_file(configuration, extended):
+    units = get_specification_units()
+    return romea_common_description.generate_configuration_file(configuration, units, extended)
+
+
+def generate_ros2_control_description(prefix, mode, base_name):
+
+    if mode == "simulation":
+        mode += "_gazebo_classic"
 
     ros2_control_xacro_file = (
         get_package_share_directory("effibote3_description")
@@ -34,26 +92,30 @@ def urdf(prefix, mode, base_name, controller_manager_config_yaml_file, ros_prefi
         },
     )
 
-    ros2_control_config_urdf_file = "/tmp/" + prefix + base_name + "_ros2_control.urdf"
+    return ros2_control_urdf_xml.toprettyxml(indent="  ")
 
-    with open(ros2_control_config_urdf_file, "w") as f:
-        f.write(ros2_control_urdf_xml.toprettyxml())
 
-    xacro_file = (
+def generate_urdf_description(
+        prefix, mode, base_name, controller_manager_config_yaml_file, ros_prefix
+):
+
+    if mode == "simulation":
+        mode += "_gazebo_classic"
+
+    base_xacro_file = (
         get_package_share_directory("effibote3_description")
         + "/urdf/effibote3.urdf.xacro"
     )
 
-    urdf_xml = xacro.process_file(
-        xacro_file,
+    base_urdf_xml = xacro.process_file(
+        base_xacro_file,
         mappings={
             "prefix": prefix,
             "mode": mode,
             "base_name": base_name,
             "controller_manager_config_yaml_file": controller_manager_config_yaml_file,
-            "ros2_control_config_urdf_file": ros2_control_config_urdf_file,
-            "ros_prefix": ros_prefix,
+            # "ros_prefix": ros_prefix,
         },
     )
 
-    return urdf_xml.toprettyxml()
+    return base_urdf_xml.toprettyxml(indent="  ")

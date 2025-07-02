@@ -14,13 +14,12 @@
   <depend>launch</depend>
   <depend>launch_ros</depend>
   <depend>ament_index_python</depend>
-  <depend>romea_common_bringup</depend>
+  <depend>romea_common_meta_bringup</depend>
   <depend>effibote3_description</depend>
 
   <exec_depend>romea_mobile_base</exec_depend>
   <exec_depend>romea_simulation</exec_depend>
-  <exec_depend>romea_teleop_drivers</exec_depend>
-  <exec_depend>romea_joystick_bringup</exec_depend>
+  <exec_depend>romea_joystick_meta_bringup</exec_depend>
   <exec_depend>romea_cmd_mux</exec_depend>
 
   <exec_depend>gazebo_plugins</exec_depend>

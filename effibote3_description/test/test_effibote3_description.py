@@ -15,48 +15,67 @@
 
 # import pytest
 import xml.etree.ElementTree as ET
-from effibote3_description import urdf
+from effibote3_description import generate_urdf_description, generate_ros2_control_description
 
 
 def urdf_xml(mode):
     prefix = "robot_"
     ros_prefix = "/robot/"
     base_name = "base"
-    controller_conf_yaml_file = "mobile_base_controller.yaml"
+    controller_conf_yaml_file = mode + "_controller.yaml"
+
+    print(generate_urdf_description(prefix, mode, base_name, controller_conf_yaml_file, ros_prefix))
+
     return ET.fromstring(
-        urdf(prefix, mode, base_name, controller_conf_yaml_file, ros_prefix)
+        generate_urdf_description(
+            prefix, mode, base_name, controller_conf_yaml_file, ros_prefix
+        )
     )
 
 
-def ros2_control_urdf_xml(mode):
-    urdf_xml(mode)
-    return ET.parse("/tmp/robot_base_ros2_control.urdf")
+def ros2_control_xml(mode):
+    prefix = "robot_"
+    base_name = "base"
+
+    return ET.fromstring(
+        generate_ros2_control_description(
+            prefix, mode, base_name
+        )
+    )
 
 
 def test_footprint_link_name():
     assert urdf_xml("live").find("link").get("name") == "robot_base_footprint"
 
 
-def test_hardware_plugin_name():
-
-    assert (
-        ros2_control_urdf_xml("live").find("ros2_control/hardware/plugin").text
-        == "effibote3_hardware/EffibotE3Hardware"
-    )
-
-    assert (
-        ros2_control_urdf_xml("simulation")
-        .find("ros2_control/hardware/plugin")
-        .text
-        == "romea_mobile_base_gazebo/GazeboSystemInterface4WD"
-    )
-
-
 def test_controller_filename_name():
 
     assert (
-        urdf_xml("simulation")
-        .find("gazebo/plugin/controller_manager_config_file")
-        .text
-        == "mobile_base_controller.yaml"
+        urdf_xml("simulation").find("gazebo/plugin/parameters").text
+        == "simulation_controller.yaml"
+    )
+
+
+def test_ros_namespace():
+
+    assert (
+        urdf_xml("simulation").find("gazebo/plugin/ros/namespace").text
+        == "/effibote3/base"
+    )
+
+
+def test_hardware_plugin_name():
+
+    ros2_control_urdf_xml = ros2_control_xml("live")
+
+    assert (
+        ros2_control_urdf_xml.find("ros2_control/hardware/plugin").text
+        == "effibote3_hardware/EffibotE3Hardware"
+    )
+
+    ros2_control_urdf_xml = ros2_control_xml("simulation_gazebo_classic")
+
+    assert (
+        ros2_control_urdf_xml.find("ros2_control/hardware/plugin").text
+        == "romea_mobile_base_gazebo/GazeboSystemInterface4WD"
     )
