@@ -19,25 +19,25 @@ geometry:
     height: 0.18000
     center: [0., 0., 0.188]
   ground_clearance: 0.098
-
+  fake_wheelbase: 1.2
 
 wheels_speed_control:
-    command:
-      maximal_speed: 3.0
-      maximal_acceleration: 1.0
-    sensor:
-      speed_std: 0.1
-      speed_range: 3.0
+  command:
+    maximal_speed: 3.0
+    maximal_acceleration: 1.0
+  sensor:
+    speed_std: 0.1
+    speed_range: 3.0
 
 inertia:
   mass: 17.
   center: [0., 0., 0.188]
   z_moment: 10.0
 
-control_point : [0.0, 0.0, 0.0]
+control_point: [0.0, 0.0, 0.0]
 
 joints:
-  base_footprint_joint_name : base_footprint
+  base_footprint_joint_name: base_footprint
   inertial_joint_name: inertial_joint
   front_left_wheel_spinning_joint_name: front_left_wheel_spinning_joint
   front_right_wheel_spinning_joint_name: front_right_wheel_spinning_joint
@@ -52,4 +52,3 @@ links:
   front_right_wheel_spinning_link_name: front_right_wheel_spinning_link
   rear_left_wheel_spinning_link_name: rear_left_wheel_spinning_link
   rear_right_wheel_spinning_link_name: rear_right_wheel_spinning_link
-
