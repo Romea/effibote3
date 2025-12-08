@@ -2,7 +2,5 @@ include:
   - project: "jean.laneurit/ros_gitlab_ci"
     file: ".gitlab-ci.yml"
 
-
 variables:
   PKGS_TO_BUILD_TEST: "effibote3_bringup effibote3_description effibote3_hardware"
-  ROS_DISTRO_TO_TEST: "humble"
