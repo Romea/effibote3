@@ -5,7 +5,7 @@
     params="mode ros_prefix base_name controller_manager_config_yaml_file">
 
     <xacro:if value="${'simulation' in mode}">
-      <xacro:if value="${'gazebo' in  mode}">
+      <xacro:if value="${'gazebo_classic' in  mode}">
 
         <gazebo>
           <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
@@ -20,9 +20,25 @@
         </gazebo>
 
       </xacro:if>
+
+      <xacro:if value="${'gazebo_classic' not in  mode}">
+
+        <gazebo>
+          <plugin filename="gz_ros2_control-system"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>ros2_control_description</robot_param_node>
+            <parameters>${controller_manager_config_yaml_file}</parameters>
+            <!-- <hold_joints>true</hold_joints> -->
+            <ros>
+              <namespace>${ros_prefix}${base_name}</namespace>
+            </ros>
+          </plugin>
+        </gazebo>
+
+      </xacro:if>
     </xacro:if>
 
   </xacro:macro>
-
 
 </robot>

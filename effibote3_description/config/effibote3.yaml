@@ -36,7 +36,7 @@ inertia:
 control_point: [0.0, 0.0, 0.0]
 
 joints:
-  base_footprint_joint_name: base_footprint
+  base_footprint_joint_name: base_footprint_joint
   inertial_joint_name: inertial_joint
   front_left_wheel_spinning_joint_name: front_left_wheel_spinning_joint
   front_right_wheel_spinning_joint_name: front_right_wheel_spinning_joint

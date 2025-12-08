@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
 
 from effibote3_bringup import generate_urdf_description
-from romea_common_meta_bringup import robot_urdf_prefix, robot_prefix
-import sys
+from romea_common_meta_bringup.utils import complete_mode, robot_prefix, robot_urdf_prefix
 
 if __name__ == "__main__":
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
         name, value = argument.split(":")
         parameters[name] = value
 
-    mode = parameters["mode"]
+    mode = complete_mode(parameters["mode"])
     base_name = parameters["base_name"]
     prefix = robot_urdf_prefix(parameters["robot_namespace"])
     ros_prefix = robot_prefix(parameters["robot_namespace"])

@@ -15,7 +15,8 @@
 
 # import pytest
 import xml.etree.ElementTree as ET
-from effibote3_description import generate_urdf_description, generate_ros2_control_description
+
+from effibote3_description import generate_ros2_control_description, generate_urdf_description
 
 
 def urdf_xml(mode):
@@ -23,8 +24,6 @@ def urdf_xml(mode):
     ros_prefix = "/robot/"
     base_name = "base"
     controller_conf_yaml_file = mode + "_controller.yaml"
-
-    print(generate_urdf_description(prefix, mode, base_name, controller_conf_yaml_file, ros_prefix))
 
     return ET.fromstring(
         generate_urdf_description(
