@@ -12,33 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from launch import LaunchDescription
-
-from launch.actions import (
-    IncludeLaunchDescription,
-    DeclareLaunchArgument,
-    OpaqueFunction,
-    GroupAction,
-)
-
-from launch.substitutions import LaunchConfiguration
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.actions import SetParameter
-
 from ament_index_python.packages import get_package_share_directory
 from effibote3_description import get_specifications_path_file
+
+from launch import LaunchDescription
+from launch.actions import (
+    DeclareLaunchArgument,
+    GroupAction,
+    IncludeLaunchDescription,
+    OpaqueFunction,
+)
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import SetParameter
+
+import romea_common_meta_bringup.ros_launch as common
+import romea_joystick_meta_bringup.ros_launch as joystick
 
 
 def launch_setup(context, *args, **kwargs):
 
-    mode = LaunchConfiguration("mode").perform(context)
-    joystick_topic = LaunchConfiguration("joystick_topic").perform(context)
-
+    mode = common.get_mode(context)
+    joystick_topic = joystick.get_joystick_topic(context)
+    joystick_configuration_file_path = joystick.get_joystick_configuration_file_path(context)
+    # teleop_configuration_file_path = teleop.get_teleop_configuration_file_path(context)
     mobile_base_configuration_file_path = get_specifications_path_file()
-
-    joystick_configuration_file_path = LaunchConfiguration(
-        "joystick_configuration_file_path"
-    ).perform(context)
 
     teleop_configuration_file_path = LaunchConfiguration(
         "teleop_configuration_file_path"
@@ -74,9 +72,9 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument("mode"),
-            DeclareLaunchArgument("joystick_configuration_file_path"),
-            DeclareLaunchArgument("joystick_topic"),
+            common.declare_mode(),
+            joystick.declare_joystick_topic(),
+            joystick.declare_joystick_configuration_file_path(),
             DeclareLaunchArgument(
                 "teleop_configuration_file_path",
                 default_value=default_teleop_configuration_file_path

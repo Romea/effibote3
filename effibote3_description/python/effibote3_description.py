@@ -27,12 +27,16 @@
 # limitations under the License.
 
 
-import xacro
-import yaml
 from ament_index_python.packages import get_package_share_directory
 
 import romea_common_description
-from romea_mobile_base_description import get_specification_units, get_complete_configuration
+from romea_mobile_base_description import (
+    get_complete_configuration,
+    get_specification_units,
+)
+
+import xacro
+import yaml
 
 
 def get_specifications_path_file():
