@@ -1,12 +1,9 @@
 /**:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 100 # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
-
-    diff_drive_controller:
-      type: diff_drive_controller/DiffDriveController
 
     mobile_base_controller:
       type: romea_mobile_base_controllers/MobileBaseController4WD
