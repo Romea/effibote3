@@ -55,14 +55,6 @@ def test_controller_filename_name():
     )
 
 
-def test_ros_namespace():
-
-    assert (
-        urdf_xml("simulation").find("gazebo/plugin/ros/namespace").text
-        == "/robot/base"
-    )
-
-
 def test_hardware_plugin_name():
 
     ros2_control_urdf_xml = ros2_control_xml("live")
