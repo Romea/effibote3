@@ -78,3 +78,10 @@ def test_hardware_plugin_name():
         ros2_control_urdf_xml.find("ros2_control/hardware/plugin").text
         == "romea_mobile_base_gazebo/GazeboSystemInterface4WD"
     )
+
+    ros2_control_urdf_xml = ros2_control_xml("simulation_gazebo")
+
+    assert (
+        ros2_control_urdf_xml.find("ros2_control/hardware/plugin").text
+        == "romea_mobile_base_gazebo/GazeboSystemInterface"
+    )
