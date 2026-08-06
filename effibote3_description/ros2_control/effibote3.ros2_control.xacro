@@ -43,14 +43,34 @@
     <xacro:property name="maximal_wheel_speed"
       value="${props['wheels_speed_control']['command']['maximal_speed']}" />
 
-    <!-- hardware plugins -->
-    <xacro:property name="simulation_hardware_plugin"
-      value="romea_mobile_base_gazebo/GazeboSystemInterface4WD" />
-    <xacro:property name="live_hardware_plugin"
-      value="effibote3_hardware/EffibotE3Hardware" />
 
+    <!-- simulation plugins -->
+    <xacro:if value="${mode == 'simulation_gazebo'}">
+      <xacro:property
+        name="hardware_plugin"
+        value="romea_mobile_base_gazebo/GazeboSystemInterface" />
+    </xacro:if>
 
-    <xacro:base_control mode="${mode}" base_name="${base_name}" />
+    <xacro:if value="${mode == 'simulation_gazebo_classic'}">
+      <xacro:property name="hardware_plugin"
+        value="romea_mobile_base_gazebo/GazeboSystemInterface4WD" />
+    </xacro:if>
+
+    <xacro:if value="${'4dv' in mode or 'isaac' in mode}">
+      <xacro:property
+        name="hardware_plugin"
+        value="romea_mobile_base_simulation/GenericSimulationSystemInterface" />
+    </xacro:if>
+
+    <xacro:if value="${mode ==  'live'}">
+      <xacro:property name="hardware_plugin"
+          value="effibote3_hardware/EffibotE3Hardware" />
+    </xacro:if>
+
+    <xacro:base_control
+      mode="${mode}"
+      base_name="${base_name}"
+      hardware_plugin="${hardware_plugin}" />
 
   </xacro:macro>
 
