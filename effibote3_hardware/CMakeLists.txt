@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(effibote3_hardware)
 
 # Default to C++14
@@ -35,31 +35,39 @@ add_library(
   SHARED
   src/effibote3_hardware.cpp
 )
-target_include_directories(
-  ${PROJECT_NAME}
-  PRIVATE
-  include
-)
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
 
 target_compile_definitions(
   ${PROJECT_NAME}
   PUBLIC
   ROS_DISTRO=${ROS_DISTRO})
 
-ament_target_dependencies(
-  ${PROJECT_NAME}
-  hardware_interface
-  pal_statistics
-  pluginlib
-  rclcpp
-  rclcpp_lifecycle
-  romea_core_common
-  romea_core_mobile_base
-  romea_common_utils
-  romea_mobile_base_utils
-  romea_mobile_base_hardware
-  std_msgs
-  serial
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  hardware_interface::hardware_interface
+  ${pal_statistics_LIBRARIES}
+  pluginlib::pluginlib
+  rclcpp::rclcpp
+  rclcpp_lifecycle::rclcpp_lifecycle
+  romea_core_common::romea_core_common
+  romea_core_mobile_base::romea_core_mobile_base
+  romea_common_utils::romea_common_utils
+  romea_mobile_base_utils::romea_mobile_base_utils
+  romea_mobile_base_hardware::romea_mobile_base_hardware
+  ${std_msgs_TARGETS}
+  ${serial_LIBRARIES}
+)
+
+# These dependencies still use legacy CMake exports.
+target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
+  ${pal_statistics_INCLUDE_DIRS}
+  ${serial_INCLUDE_DIRS}
+)
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC
+  ${pal_statistics_DEFINITIONS}
+  ${serial_DEFINITIONS}
 )
 
 # Causes the visibility macros to use dllexport rather than dllimport,
@@ -72,6 +80,7 @@ pluginlib_export_plugin_description_file(hardware_interface effibote3_hardware.x
 # INSTALL
 install(
   TARGETS ${PROJECT_NAME}
+  EXPORT export_${PROJECT_NAME}
   DESTINATION lib
 )
 
@@ -85,13 +94,15 @@ install(
 ##endif()
 
 ## EXPORTS
-ament_export_include_directories(
-  include
-)
+#ament_export_include_directories(
+#  include
+#)
 
-ament_export_libraries(
-  ${PROJECT_NAME}
-)
+#ament_export_libraries(
+#  ${PROJECT_NAME}
+#)
+ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
+ament_export_dependencies(pal_statistics)
 
 ament_export_dependencies(
   hardware_interface

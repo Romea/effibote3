@@ -3,4 +3,7 @@ include:
     file: ".gitlab-ci.yml"
 
 variables:
+  ROS_HUMBLE_IMAGE: "osrf/ros:humble-desktop-full-jammy"
+  ROS_JAZZY_IMAGE: "osrf/ros:jazzy-desktop-full-noble"
+  ROS_LYRICAL_IMAGE: "osrf/ros:lyrical-desktop-full-resolute"
   PKGS_TO_BUILD_TEST: "effibote3_bringup effibote3_description effibote3_hardware"
